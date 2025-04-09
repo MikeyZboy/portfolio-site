@@ -1,0 +1,19 @@
+.canvas {
+    /* border-radius: 50%; */
+    /* background: linear-gradient(90deg, #ff7e5f 0%, #feb47b 100%); */
+    /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); */
+    /* backdrop-filter: blur(5px); */
+    /* -webkit-backdrop-filter: blur(5px); */
+    width: 200px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+/* 
+    size-adjust: 50%;
+    animation: infinite;
+    -webkit-animation: infinite; */
+    /* background-image: '../assets/HeartMemoji.png';
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; */
+}

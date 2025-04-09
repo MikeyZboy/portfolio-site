@@ -1,5 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Afacad+Flux:slnt,wght@-14..14,300&family=Dosis:wght@200..800&display=swap');
+@import "tailwindcss";
+
+/* @theme {
+  --font-roboto: "Roboto", sans-serif; 
+} */
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Afacad Flux", sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
