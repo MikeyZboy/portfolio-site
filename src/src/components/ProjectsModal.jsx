@@ -2,10 +2,8 @@ import React, { useState } from 'react';
 import { Button, Modal } from 'antd';
 
 const ProjectsModal = ({ visible, onClose }) => {
-  if (!visible) return null;
-
   const [loading, setLoading] = useState(false);
-
+  
   const handleOk = () => {
     setLoading(true);
     setTimeout(() => {
@@ -13,11 +11,12 @@ const ProjectsModal = ({ visible, onClose }) => {
       setShowModal(false);
     }, 3000);
   };
-
+  
   const projectTitle = 'Returns AI Agent';
   const projectDescription =
-    'A RAG based AI bot that reads an uploaded receipt and helps the user figure out the return policy and reminds them when the date approaches.';
+  'A RAG based AI bot that reads an uploaded receipt and helps the user figure out the return policy and reminds them when the date approaches.';
   
+  if (!visible) return null;
     return (
     <>
       <Modal
@@ -31,13 +30,12 @@ const ProjectsModal = ({ visible, onClose }) => {
           </Button>,
           <Button
             key="link"
-            href="https://google.com"
+            href="#"
             target="_blank"
-            type="primary"
             loading={loading}
             onClick={handleOk}
           >
-            Search on Google
+            View on Github
           </Button>,
         ]}
       >

@@ -8,6 +8,7 @@
     height: 300px;
     display: flex;
     justify-content: center;
+    position: relative;
 /* 
     size-adjust: 50%;
     animation: infinite;
