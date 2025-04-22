@@ -16,6 +16,7 @@ import SkillsModal from './components/SkillsModal';
 import ExperienceModal from './components/ExperienceModal';
 import EthosModal from './components/EthosModal';
 import MemojiCarousel from './components/MemojiCarousel';
+import TimeDisplay from './components/CurrentTime';
 
 export const App = () => {
   const [isFeaturedProjectVisible, setIsFeaturedProjectVisible] = useState(false);
@@ -140,7 +141,7 @@ export const App = () => {
           <div>
             <div className="columns-2">
               <div className="h-15 bg-gray-800 rounded-lg mb-2 p-2 hover:bg-gray-700 transition duration-300 text-left overflow-auto">
-                  <h3>Time</h3>
+                  <TimeDisplay />
               </div>
               <div className="h-15 bg-gray-800 rounded-lg mb-2 p-2 hover:bg-gray-700 transition duration-300 text-left overflow-auto">
                   <h3>Feedback</h3>
