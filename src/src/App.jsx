@@ -140,14 +140,12 @@ export const App = () => {
           </div>
           <div>
             <div className="columns-2">
-              <div className="h-15 bg-gray-800 rounded-lg mb-2 p-2 hover:bg-gray-700 transition duration-300 text-left overflow-auto">
+              <div className="h-45 w-45 bg-gray-800 rounded-lg mb-2 p-2 hover:bg-gray-700 transition duration-300 text-left overflow-auto">
                   <TimeDisplay />
               </div>
               <div className="h-15 bg-gray-800 rounded-lg mb-2 p-2 hover:bg-gray-700 transition duration-300 text-left overflow-auto">
                   <h3>Feedback</h3>
               </div>
-            </div>
-            <div className="columns-2">
               <div className="h-15 bg-gray-800 rounded-lg mb-2 p-2 hover:bg-gray-700 transition duration-300 text-left overflow-auto">
                   <h3>Travel</h3>
               </div>
