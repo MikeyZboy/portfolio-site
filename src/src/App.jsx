@@ -14,18 +14,18 @@ import './App.css'
 import ProjectsModal from './components/ProjectsModal';
 import SkillsModal from './components/SkillsModal';
 import ExperienceModal from './components/ExperienceModal';
-import TravelModal from './components/TravelModal';
+import EthosModal from './components/EthosModal';
 import MemojiCarousel from './components/MemojiCarousel';
 
 export const App = () => {
   const [isFeaturedProjectVisible, setIsFeaturedProjectVisible] = useState(false);
   const [skillsVisible, setSkillsVisible] = useState(false);
-  const [travelVisible, setTravelVisible] = useState(false);
+  const [ethosVisible, setEthosVisible] = useState(false);
   const [experienceVisible, setExperienceVisible] = useState(false);
 
   const toggleFeaturedProjectModal = () => setIsFeaturedProjectVisible((prev) => !prev);
   const toggleLogoCloud = () => setSkillsVisible((prev) => !prev);
-  const toggleTravelCloud = () => setTravelVisible((prev) => !prev);
+  const toggleEthosCloud = () => setEthosVisible((prev) => !prev);
   const toggleExperienceCloud = () => setExperienceVisible((prev) => !prev);
 
   const memojis = [
@@ -99,13 +99,13 @@ export const App = () => {
             
             <div className="flex-row bg-gray-800 rounded-lg m-1">
               <h2 className="text-2xl font-semibold mb-2 cursor-pointer text-cyan-300 hover:text-cyan-200"
-              onClick={toggleTravelCloud}>ethos</h2>
+              onClick={toggleEthosCloud}>ethos</h2>
             </div>
             {/* Travel Modal */}
-            <TravelModal visible={travelVisible} onClose={toggleTravelCloud} />
+            <EthosModal visible={ethosVisible} onClose={toggleEthosCloud} />
             <div className="flex-row bg-gray-800 rounded-lg m-1">
               <h2 className="text-2xl font-semibold mb-2 cursor-pointer text-cyan-300 hover:text-cyan-200"
-              onClick={toggleExperienceCloud}>background</h2>
+              onClick={toggleExperienceCloud}>resume</h2>
             </div>
             {/* Experience Modal */}
               <ExperienceModal visible={experienceVisible} onClose={toggleExperienceCloud} />
