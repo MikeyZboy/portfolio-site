@@ -23,11 +23,12 @@ const MemojiCarousel = ({ images }) => {
                         position: 'absolute',
                         top: 0,
                         left: 0,
-                        width: '99%',
-                        height: '99%',
-                        objectFit: 'contain',
+                        width: '90%',
+                        height: '90%',
+                        objectFit: 'cover',
                         opacity: currentIndex === index ? 1 : 0,
                         transition: 'opacity 1.5s ease-in-out',
+                        overflow: 'visible',
                     }}
                 />
             ))}
