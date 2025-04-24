@@ -36,13 +36,12 @@ export default function TimeDisplay() {
   };
 
   return (
-    <div>
       <div
-        className="bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl shadow-lg transition-all duration-300 ease-in-out transform"
+        className="flex-col text-center bg-gradient-to-b from-black-900 to-cyan-600 rounded-lg shadow-lg transition-all duration-300 ease-in-out transform"
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
-        <h2 className="text-white text-lg mb-2 font-medium">
+        <h2 className="text-white text-lg m-1 font-medium">
           {isHovering ? 'Eastern Time (ET)' : 'Your Local Time'}
         </h2>
         <div className="text-white text-4xl font-bold">
@@ -52,6 +51,5 @@ export default function TimeDisplay() {
           {isHovering ? 'Showing ET time' : 'Hover to see Eastern Time'}
         </p>
       </div>
-    </div>
   );
 }
