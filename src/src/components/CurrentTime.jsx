@@ -1,4 +1,7 @@
 import { useState, useEffect } from 'react';
+import { Tooltip } from 'antd';
+import Clock from 'react-clock';
+import 'react-clock/dist/Clock.css';
 
 export default function TimeDisplay() {
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -14,16 +17,6 @@ export default function TimeDisplay() {
     return () => clearInterval(timer);
   }, []);
   
-  // Format the time in user's local timezone
-  const formatLocalTime = () => {
-    return currentTime.toLocaleTimeString(undefined, {
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-      hour12: true
-    });
-  };
-  
   // Format the time in Eastern timezone
   const formatEasternTime = () => {
     return currentTime.toLocaleTimeString('en-US', {
@@ -35,21 +28,39 @@ export default function TimeDisplay() {
     });
   };
 
+  // v1: Analog Clock with a Tooltip telling difference in timezones
+  // v2: Analog Clock with an Animation showing difference between the two timezones - forward or backwards
+
+  const renderAnalogClock = () => {
+    return (
+      <Clock
+        value={isHovering? formatEasternTime() : currentTime}
+        size={175}
+        renderNumbers={true}
+        hourHandLength={70}
+        minuteHandLength={90}
+        secondHandLength={90}
+        hourHandWidth={6}
+        minuteHandWidth={4}
+        secondHandWidth={2}
+        hourHandStyle={{ backgroundColor: 'white' }}
+        minuteHandStyle={{ backgroundColor: 'white' }}
+        secondHandStyle={{ backgroundColor: 'red' }}
+      />
+    );
+  }
+  const mikesTime = `It's currently ${formatEasternTime()} for Mike.`;
   return (
       <div
-        className="flex-col text-center bg-gradient-to-b from-black-900 to-cyan-600 rounded-lg shadow-lg transition-all duration-300 ease-in-out transform"
+        className="p-1 bg-gradient-to-b from-black-900 to-cyan-600 rounded-lg shadow-lg transition-all duration-300 ease-in-out transform"
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
-        <h2 className="text-white text-lg m-1 font-medium">
-          {isHovering ? 'Eastern Time (ET)' : 'Your Local Time'}
-        </h2>
-        <div className="text-white text-4xl font-bold">
-          {isHovering ? formatEasternTime() : formatLocalTime()}
+        <Tooltip title={mikesTime} placement="top">
+        <div className="text-white text-2xl font-bold">
+          {renderAnalogClock()}
         </div>
-        <p className="text-blue-100 mt-2 text-sm">
-          {isHovering ? 'Showing ET time' : 'Hover to see Eastern Time'}
-        </p>
+        </Tooltip>
       </div>
   );
 }

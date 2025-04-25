@@ -139,20 +139,24 @@ export const App = () => {
             </div>
           </div>
           <div>
-            <div className="grid grid-flow-col grid-rows-2 gap-4 justify-center">
-              <div className="col-span-2 row-span-1 bg-gray-800 rounded-lg hover:bg-gray-700 transition duration-300 text-left overflow-auto">
+            <div className="columns-2">
+              <div className="bg-gray-800 rounded-lg mb-2 hover:bg-gray-700 transition duration-300 text-left">
                   <TimeDisplay />
               </div>
-              <div className="grid grid-cols-3 gap-2">
               <div className="bg-gray-800 rounded-lg mb-2 p-2 hover:bg-gray-700 transition duration-300 text-left overflow-auto">
-                  <h3>Feedback</h3>
+                  <h3 className="text-2xl font-semibold mb-2 cursor-pointer text-cyan-300 hover:text-cyan-200">
+                    travel
+                  </h3>
               </div>
               <div className="bg-gray-800 rounded-lg mb-2 p-2 hover:bg-gray-700 transition duration-300 text-left overflow-auto">
-                  <h3>Travel</h3>
+                  <h3 className="text-2xl font-semibold mb-2 cursor-pointer text-cyan-300 hover:text-cyan-200">
+                    fun
+                  </h3>
               </div>
               <div className="bg-gray-800 rounded-lg mb-2 p-2 hover:bg-gray-700 transition duration-300 text-left overflow-auto">
-                  <h3>Fun</h3>
-              </div>
+                  <h3 className="text-2xl font-semibold mb-2 cursor-pointer text-cyan-300 hover:text-cyan-200">
+                    color theme
+                  </h3>
               </div>
             </div>
             <footer className="mt-2 text-center text-gray-500 py-0">
