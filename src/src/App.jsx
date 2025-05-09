@@ -10,6 +10,7 @@ import {
   GithubOutlined,
   CalendarOutlined,
 } from '@ant-design/icons';
+import { Button, Tooltip, List } from 'antd';
 import './App.css'
 import ProjectsModal from './components/ProjectsModal';
 import SkillsModal from './components/SkillsModal';
@@ -17,17 +18,20 @@ import ExperienceModal from './components/ExperienceModal';
 import EthosModal from './components/EthosModal';
 import MemojiCarousel from './components/MemojiCarousel';
 import TimeDisplay from './components/CurrentTime';
+import TravelMap from './components/TravelMap';
 
 export const App = () => {
   const [isFeaturedProjectVisible, setIsFeaturedProjectVisible] = useState(false);
   const [skillsVisible, setSkillsVisible] = useState(false);
   const [ethosVisible, setEthosVisible] = useState(false);
   const [experienceVisible, setExperienceVisible] = useState(false);
-
+  const [isMapVisible, setIsMapVisible] = useState(false);
+  
   const toggleFeaturedProjectModal = () => setIsFeaturedProjectVisible((prev) => !prev);
   const toggleLogoCloud = () => setSkillsVisible((prev) => !prev);
   const toggleEthosCloud = () => setEthosVisible((prev) => !prev);
   const toggleExperienceCloud = () => setExperienceVisible((prev) => !prev);
+  const toggleMap = () => setIsMapVisible((prev) => !prev);
 
   const memojis = [
     { src: HeartMemoji, alt: 'Heart Memoji' },
@@ -41,35 +45,55 @@ export const App = () => {
     <div className="bg-gray-900 text-gray-100 container max-w-screen mx-auto">
       <div className="container max-w-screen mx-auto p-4">
         {/* Bento Box Layout */}
-        <div className="grid grid-cols-3 md:grid-cols-3 gap-4">
-          {/* Welcome - Span 2 columns */}
-          <div className="bg-gray-800 rounded-lg p-6 md:col-span-3 transition duration-300 grid grid-cols-2">
+          <div className="grid grid-cols-3 md:grid-cols-3 gap-4">
+            {/* Welcome - Span 2 columns */}
+            <div className="bg-gray-800 rounded-lg p-6 md:col-span-3 transition duration-300 grid grid-cols-2">
 
             <div className="col-span-1 text-left">
               <p className="mb-4 text-xl">
-                Hello world, I am <b className="text-cyan-300">Mike Zahuta</b>, a passionate <b className="text-cyan-300">Full Stack Developer</b> with over 4 years of experience creating 
-                responsive web apps. A long time ago, in a startup far, far away, I discovered my love for coding while I was selling SaaS products. 
-                Now, I use my user-focused critical thinking and listening skills to help companies deliver the best software solutions possible.
+              Hello world, I am <b className="text-cyan-300">Mike Zahuta</b>, a passionate <b className="text-cyan-300">Full Stack Developer</b> with over 4 years of experience creating 
+              responsive web apps. A long time ago, in a startup far, far away, I discovered my love for coding while I was selling SaaS products. 
+              Now, I use my user-focused critical thinking and listening skills to help companies deliver the best software solutions possible.
               <br />
               <br />
-                When I'm not coding, you can find me walking my dog, experimenting 
-                with new spicy recipes, or trying to renovate something.
+              When I'm not coding, you can find me walking my dog, experimenting 
+              with new spicy recipes, or trying to renovate something.
               </p>
 
               <h2 className="text-2xl font-bold text-gray-900 mt-10"><i>contact</i></h2>
               <div className="bg-gray-800 rounded-lg hover:bg-gray-700 transition duration-300">
-                <button href="#" className="text-cyan-300 hover:text-cyan-200 m-2">
-                  <MailOutlined />
-                </button>
-                <button href="#" className="text-cyan-300 hover:text-cyan-200 m-2">
-                  <LinkedinOutlined />
-                </button>
-                <button href="#" className="text-cyan-300 hover:text-cyan-200 m-2">
-                  <GithubOutlined />
-                </button>
-                <button href="#" className="text-cyan-300 hover:text-cyan-200 m-2">
-                  <CalendarOutlined />
-                </button>
+                <Tooltip title="Drop me a message!">
+                  <Button 
+                    type="link"
+                    icon={<MailOutlined style={{ color: 'cyan', fontSize: '32px' }} />}
+                    className="m-6"
+                    onClick={() => window.open('mailto:mike.zahuta@gmail.com', '_blank')}
+                  />
+                </Tooltip>
+                <Tooltip title="Connect with me on LinkedIn!"> 
+                  <Button
+                    type="link"
+                    icon={<LinkedinOutlined style={{ color: 'cyan', fontSize: '32px' }} />}
+                    className="m-6"
+                    onClick={() => window.open('https://www.linkedin.com/in/mikezahuta/', '_blank')}
+                  />
+                </Tooltip>
+                <Tooltip title="Check out my GitHub!">
+                  <Button
+                    type="link"
+                    icon={<GithubOutlined style={{ color: 'cyan', fontSize: '32px' }} />}
+                    className="m-6"
+                    onClick={() => window.open('https://github.com/MikeyZboy', '_blank')}
+                  />
+                </Tooltip>
+                <Tooltip title="Schedule a meeting with me!">
+                  <Button
+                    type="link"
+                    icon={<CalendarOutlined style={{ color: 'cyan', fontSize: '32px' }} />}
+                    className="m-6"
+                    onClick={() => window.open('https://calendly.com/mike-zahuta', '_blank')}
+                  />
+                </Tooltip>
               </div>
             </div>
             {/* <div style={{ position: 'relative', width: '100%', height: '100%' }}> */}
@@ -126,14 +150,48 @@ export const App = () => {
             <h2 className="text-2xl font-bold mb-1 text-gray-900 text-left"><i>past (not actively maintained)</i></h2>
             <div className="flex flex-row grid-cols-1 md:grid-cols-3 gap-2">
               {[
-                { name: 'Post-Ed Planner', tech: 'Postgres, Express, React, NodeJS' },
-                { name: 'Make-Your-Day (Momentum Clone)', tech: 'React, OpenWeather API' },
-                { name: 'All-Inclusive Resort Searcher', tech: 'Mongo, Express, React, NodeJS, Heroku' },
-                { name: 'Streamline Sports', tech: 'Javascript, CSS, HTML, Axios' }
+                { 
+                  name: 'Post-Ed Planner',
+                  tech: 'Postgres, Express, React, NodeJS', 
+                  link: 'https://github.com/MikeyZboy/PostBootCampPlanner', 
+                  icon: <GithubOutlined style={{ color: 'cyan', fontSize: '24px' }} />
+                },
+                { 
+                  name: 'Make-Your-Day (Momentum Clone)',
+                  tech: 'React, OpenWeather API',
+                  link: 'https://github.com/MikeyZboy/make-your-day', 
+                  icon: <GithubOutlined style={{ color: 'cyan', fontSize: '24px' }}/> 
+                },
+                { 
+                  name: 'All-Inclusive Resort Searcher', 
+                  tech: 'Mongo, Express, React, NodeJS, Heroku', 
+                  link: 'https://github.com/MikeyZboy/All_Inclusive', 
+                  icon: <GithubOutlined style={{ color: 'cyan', fontSize: '24px' }} /> 
+                },
+                { name: 'Streamline Sports',
+                  tech: 'Javascript, CSS, HTML, Axios', 
+                  link: 'https://github.com/MikeyZboy/StreamlineSports', 
+                  icon: <GithubOutlined style={{ color: 'cyan', fontSize: '24px' }} /> 
+                },
               ].map((project) => (
                 <div key={project.name} className="bg-gray-900 p-4 rounded-lg hover:bg-gray-800 transition duration-300">
                   <h3 className="text-lg font-semibold mb-1 text-cyan-300 hover:text-cyan-200">{project.name}</h3>
-                  <p className="text-gray-400 text-sm">{project.tech}</p>
+                  <List className="list-disc list-inside text-gray-400 text-sm">
+                    {project.tech.split(', ').map((techItem) => (
+                      <List.Item key={techItem}>{techItem}</List.Item>
+                    ))}
+                  </List>
+                  {/* <p className="text-gray-400 text-sm">{project.tech}</p> */}
+                  <div className="mt-5">
+                    <Tooltip title="View on GitHub">
+                      <Button
+                        type="link"
+                        icon={project.icon}
+                        className="m-1 absolute bottom-0"
+                        onClick={() => window.open(project.link, '_blank')}
+                      />
+                    </Tooltip>
+                  </div>
                 </div>
               ))}
             </div>
@@ -143,26 +201,30 @@ export const App = () => {
               <div className="bg-gray-800 rounded-lg mb-2 hover:bg-gray-700 transition duration-300 text-left">
                   <TimeDisplay />
               </div>
-              <div className="bg-gray-800 rounded-lg mb-2 p-2 hover:bg-gray-700 transition duration-300 text-left overflow-auto">
-                  <h3 className="text-2xl font-semibold mb-2 cursor-pointer text-cyan-300 hover:text-cyan-200">
+
+              <div className="flex-row bg-gray-800 rounded-lg mb-2 p-2 hover:bg-gray-700 transition duration-300 text-left overflow-auto">
+                  <h2 className="text-2xl font-semibold mb-2 cursor-pointer text-cyan-300 hover:text-cyan-200" onClick={toggleMap}>
                     travel
-                  </h3>
+                  </h2>
               </div>
-              <div className="bg-gray-800 rounded-lg mb-2 p-2 hover:bg-gray-700 transition duration-300 text-left overflow-auto">
+              {/* <TravelMap visible={isMapVisible} onClose={toggleMap} /> */}
+
+              <div className="flex-row bg-gray-800 rounded-lg mb-2 p-2 hover:bg-gray-700 transition duration-300 text-left overflow-auto">
                   <h3 className="text-2xl font-semibold mb-2 cursor-pointer text-cyan-300 hover:text-cyan-200">
                     fun
                   </h3>
               </div>
-              <div className="bg-gray-800 rounded-lg mb-2 p-2 hover:bg-gray-700 transition duration-300 text-left overflow-auto">
+
+              <div className="flex-row bg-gray-800 rounded-lg mb-2 p-2 hover:bg-gray-700 transition duration-300 text-left overflow-auto">
                   <h3 className="text-2xl font-semibold mb-2 cursor-pointer text-cyan-300 hover:text-cyan-200">
                     color theme
                   </h3>
               </div>
             </div>
-            <footer className="mt-2 text-center text-gray-500 py-0">
-              <p>© 2025 Mike Zahuta. All rights reserved.</p>
-            </footer>
           </div>
+          <footer className="mt-2 text-center text-gray-500 py-0">
+            <p>© 2025 Mike Zahuta. All rights reserved.</p>
+          </footer>
         </div>
       </div>
     </div>
