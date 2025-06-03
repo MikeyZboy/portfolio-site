@@ -9,6 +9,7 @@ import {
   LinkedinOutlined,
   GithubOutlined,
   CalendarOutlined,
+  CodeOutlined,
 } from '@ant-design/icons';
 import { Button, Tooltip, List } from 'antd';
 import './App.css'
@@ -26,6 +27,7 @@ export const App = () => {
   const [ethosVisible, setEthosVisible] = useState(false);
   const [experienceVisible, setExperienceVisible] = useState(false);
   const [isMapVisible, setIsMapVisible] = useState(false);
+  const [content, setContent] = useState("");
   
   const toggleFeaturedProjectModal = () => setIsFeaturedProjectVisible((prev) => !prev);
   const toggleLogoCloud = () => setSkillsVisible((prev) => !prev);
@@ -40,7 +42,7 @@ export const App = () => {
     { src: cute, alt: 'Cute Memoji' },
     { src: CallMemoji, alt: 'Call Memoji' },
   ];
-
+  console.log('content?', content);
   return (
     <div className="bg-gray-900 text-gray-100 container max-w-screen mx-auto">
       <div className="container max-w-screen mx-auto p-4">
@@ -61,7 +63,7 @@ export const App = () => {
               </p>
 
               <h2 className="text-2xl font-bold text-gray-900 mt-10"><i>contact</i></h2>
-              <div className="bg-gray-800 rounded-lg hover:bg-gray-700 transition duration-300">
+              <div className="bg-gray-800 rounded-lg">
                 <Tooltip title="Drop me a message!">
                   <Button 
                     type="link"
@@ -147,47 +149,42 @@ export const App = () => {
           
           {/* Other Projects - Span full width */}
           <div className="bg-gray-800 rounded-lg mb-2 p-2 md:col-span-2 hover:bg-gray-700 transition duration-300 overflow-x-auto">
-            <h2 className="text-2xl font-bold mb-1 text-gray-900 text-left"><i>past (not actively maintained)</i></h2>
+            <h2 className="text-2xl font-bold mb-1 text-gray-900 text-left"><i>past projects (not actively maintained)</i></h2>
             <div className="flex flex-row grid-cols-1 md:grid-cols-3 gap-2">
               {[
                 { 
                   name: 'Post-Ed Planner',
                   tech: 'Postgres, Express, React, NodeJS', 
                   link: 'https://github.com/MikeyZboy/PostBootCampPlanner', 
-                  icon: <GithubOutlined style={{ color: 'cyan', fontSize: '24px' }} />
+                  icon: <CodeOutlined style={{ color: 'cyan', fontSize: '24px' }} />
                 },
                 { 
                   name: 'Make-Your-Day (Momentum Clone)',
                   tech: 'React, OpenWeather API',
                   link: 'https://github.com/MikeyZboy/make-your-day', 
-                  icon: <GithubOutlined style={{ color: 'cyan', fontSize: '24px' }}/> 
+                  icon: <CodeOutlined style={{ color: 'cyan', fontSize: '24px' }}/> 
                 },
                 { 
                   name: 'All-Inclusive Resort Searcher', 
                   tech: 'Mongo, Express, React, NodeJS, Heroku', 
                   link: 'https://github.com/MikeyZboy/All_Inclusive', 
-                  icon: <GithubOutlined style={{ color: 'cyan', fontSize: '24px' }} /> 
+                  icon: <CodeOutlined style={{ color: 'cyan', fontSize: '24px' }} /> 
                 },
                 { name: 'Streamline Sports',
                   tech: 'Javascript, CSS, HTML, Axios', 
                   link: 'https://github.com/MikeyZboy/StreamlineSports', 
-                  icon: <GithubOutlined style={{ color: 'cyan', fontSize: '24px' }} /> 
+                  icon: <CodeOutlined style={{ color: 'cyan', fontSize: '24px' }} /> 
                 },
               ].map((project) => (
-                <div key={project.name} className="bg-gray-900 p-4 rounded-lg hover:bg-gray-800 transition duration-300">
+                <div key={project.name} className="bg-gray-900 p-4 rounded-lg hover:bg-gray-800 transition duration-300 relative">
                   <h3 className="text-lg font-semibold mb-1 text-cyan-300 hover:text-cyan-200">{project.name}</h3>
-                  <List className="list-disc list-inside text-gray-400 text-sm">
-                    {project.tech.split(', ').map((techItem) => (
-                      <List.Item key={techItem}>{techItem}</List.Item>
-                    ))}
-                  </List>
-                  {/* <p className="text-gray-400 text-sm">{project.tech}</p> */}
-                  <div className="mt-5">
-                    <Tooltip title="View on GitHub">
+                  <p className="text-gray-400 text-sm mb-10">{project.tech}</p>
+                  <div className="absolute bottom-2 right-2 mt-5">
+                    <Tooltip title="View Code">
                       <Button
                         type="link"
                         icon={project.icon}
-                        className="m-1 absolute bottom-0"
+                        className="m-1"
                         onClick={() => window.open(project.link, '_blank')}
                       />
                     </Tooltip>
@@ -207,8 +204,8 @@ export const App = () => {
                     travel
                   </h2>
               </div>
-              {/* <TravelMap visible={isMapVisible} onClose={toggleMap} /> */}
-
+              <TravelMap visible={isMapVisible} onClose={toggleMap} setTooltipContent={setContent} />
+              <Tooltip title={content}/>
               <div className="flex-row bg-gray-800 rounded-lg mb-2 p-2 hover:bg-gray-700 transition duration-300 text-left overflow-auto">
                   <h3 className="text-2xl font-semibold mb-2 cursor-pointer text-cyan-300 hover:text-cyan-200">
                     fun
@@ -221,10 +218,10 @@ export const App = () => {
                   </h3>
               </div>
             </div>
-          </div>
           <footer className="mt-2 text-center text-gray-500 py-0">
             <p>© 2025 Mike Zahuta. All rights reserved.</p>
           </footer>
+          </div>
         </div>
       </div>
     </div>
