@@ -11,7 +11,7 @@ import {
   CalendarOutlined,
   CodeOutlined,
 } from '@ant-design/icons';
-import { Button, Tooltip, List } from 'antd';
+import { Button, Tooltip, List, Flex } from 'antd';
 import './App.css'
 import ProjectsModal from './components/ProjectsModal';
 import SkillsModal from './components/SkillsModal';
@@ -42,8 +42,9 @@ export const App = () => {
     { src: cute, alt: 'Cute Memoji' },
     { src: CallMemoji, alt: 'Call Memoji' },
   ];
-  console.log('content?', content);
+
   return (
+    <Flex gap="middle" alig="flex-start" justify="center" className="min-h-screen bg-gray-900 text-gray-100">
     <div className="bg-gray-900 text-gray-100 container max-w-screen mx-auto">
       <div className="container max-w-screen mx-auto p-4">
         {/* Bento Box Layout */}
@@ -98,10 +99,9 @@ export const App = () => {
                 </Tooltip>
               </div>
             </div>
-            {/* <div style={{ position: 'relative', width: '100%', height: '100%' }}> */}
-            <div className="relative inset-0 flex items-center justify-center">
-              <MemojiCarousel images={memojis} />
-            </div>
+              <div className="relative inset-0 flex items-center justify-center hidden md:block">
+                <MemojiCarousel images={memojis} />
+              </div>
           </div>
           
           {/* Featured Project/Skills/Experience - Span 3 columns */}
@@ -142,8 +142,8 @@ export const App = () => {
           <div className="flex-col container h-30 bg-gray-800 rounded-lg mb-2 p-2 hover:bg-gray-700 transition duration-300 text-left overflow-auto">
             <h2 className="text-2xl font-bold mb-1 text-gray-900"><i>current work</i></h2>
             <div className="mb-4">
-              <h3 className="text-xl font-semibold text-cyan-300">Full-Stack Software Engineer I</h3>
-              <p className="text-gray-300">IQVIA • 2021-Present</p>
+              <h3 className="text-xl font-semibold text-cyan-300">Full-Stack Software Engineer</h3>
+              <p className="text-gray-300">IQVIA • Nov 2021 - Present</p>
             </div>
           </div>
           
@@ -195,35 +195,39 @@ export const App = () => {
           </div>
           <div>
             <div className="columns-2">
-              <div className="bg-gray-800 rounded-lg mb-2 hover:bg-gray-700 transition duration-300 text-left">
-                  <TimeDisplay />
-              </div>
+              <Flex justify="center" className="flex-col">
+                {/* This div will be hidden on small screens to prevent overlap */}
+                <div className="bg-gray-800 rounded-lg mb-2 hover:bg-gray-700 transition duration-300 text-left hidden md:block">
+                    <TimeDisplay />
+                </div>
 
-              <div className="flex-row bg-gray-800 rounded-lg mb-2 p-2 hover:bg-gray-700 transition duration-300 text-left overflow-auto">
-                  <h2 className="text-2xl font-semibold mb-2 cursor-pointer text-cyan-300 hover:text-cyan-200" onClick={toggleMap}>
-                    travel
-                  </h2>
-              </div>
-              <TravelMap visible={isMapVisible} onClose={toggleMap} setTooltipContent={setContent} />
-              <Tooltip title={content}/>
-              <div className="flex-row bg-gray-800 rounded-lg mb-2 p-2 hover:bg-gray-700 transition duration-300 text-left overflow-auto">
-                  <h3 className="text-2xl font-semibold mb-2 cursor-pointer text-cyan-300 hover:text-cyan-200">
-                    fun
-                  </h3>
-              </div>
+                <div className="flex-row bg-gray-800 rounded-lg mb-2 p-2 hover:bg-gray-700 transition duration-300 text-left overflow-auto">
+                    <h2 className="text-2xl font-semibold mb-2 cursor-pointer text-cyan-300 hover:text-cyan-200" onClick={toggleMap}>
+                      travel
+                    </h2>
+                </div>
+                <TravelMap visible={isMapVisible} onClose={toggleMap} setTooltipContent={setContent} />
+                <Tooltip title={content}/>
+                <div className="flex-row bg-gray-800 rounded-lg mb-2 p-2 hover:bg-gray-700 transition duration-300 text-left overflow-auto">
+                    <h3 className="text-2xl font-semibold mb-2 cursor-pointer text-cyan-300 hover:text-cyan-200">
+                      fun
+                    </h3>
+                </div>
 
-              <div className="flex-row bg-gray-800 rounded-lg mb-2 p-2 hover:bg-gray-700 transition duration-300 text-left overflow-auto">
-                  <h3 className="text-2xl font-semibold mb-2 cursor-pointer text-cyan-300 hover:text-cyan-200">
-                    color theme
-                  </h3>
-              </div>
+                <div className="flex-row bg-gray-800 rounded-lg mb-2 p-2 hover:bg-gray-700 transition duration-300 text-left overflow-auto">
+                    <h3 className="text-2xl font-semibold mb-2 cursor-pointer text-cyan-300 hover:text-cyan-200">
+                      color theme
+                    </h3>
+                </div>
+              </Flex>
             </div>
-          <footer className="mt-2 text-center text-gray-500 py-0">
-            <p>© 2025 Mike Zahuta. All rights reserved.</p>
-          </footer>
+            <footer className="mt-2 text-center text-gray-500 py-0">
+              <p>© 2025 Mike Zahuta. All rights reserved.</p>
+            </footer>
           </div>
         </div>
       </div>
     </div>
+    </Flex>
   );
 };

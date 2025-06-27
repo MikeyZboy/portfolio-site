@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 import * as topojson from 'topojson-client';
-const jsonUrl ='../assets/world-110m.json';
+import { visitedCountries } from '../assets/mydata'
+const jsonUrl ='https://cdn.jsdelivr.net/npm/visionscarto-world-atlas@1/world/110m.json';
 
 const InteractiveGlobe = () => {
   const svgRef = useRef();
@@ -13,35 +14,59 @@ const InteractiveGlobe = () => {
   const visitedCities = [
     { name: "New York", country: "USA", lat: 40.7128, lng: -74.0060, year: "2023", description: "Amazing skyline and Central Park" },
     { name: "Paris", country: "France", lat: 48.8566, lng: 2.3522, year: "2022", description: "Eiffel Tower and incredible museums" },
-    // { name: "Tokyo", country: "Japan", lat: 35.6762, lng: 139.6503, year: "2023", description: "Blend of modern and traditional culture" },
     { name: "London", country: "UK", lat: 51.5074, lng: -0.1278, year: "2021", description: "Historic landmarks and great theater" },
-    // { name: "Sydney", country: "Australia", lat: -33.8688, lng: 151.2093, year: "2022", description: "Beautiful harbor and opera house" },
-    // { name: "Rio de Janeiro", country: "Brazil", lat: -22.9068, lng: -43.1729, year: "2023", description: "Christ the Redeemer and Copacabana" },
-    // { name: "Cairo", country: "Egypt", lat: 30.0444, lng: 31.2357, year: "2021", description: "Ancient pyramids and rich history" },
-    // { name: "Mumbai", country: "India", lat: 19.0760, lng: 72.8777, year: "2022", description: "Vibrant culture and Bollywood" }
+    { name: "San Francisco", country: "USA", lat: 37.7749, lng: -122.4194, year: "2020", description: "Golden Gate Bridge and vibrant culture" },
+    { name: "San Luis Obispo", country: "USA", lat: 35.2828, lng: -120.6596, year: "2019", description: "Beautiful coastal town with great food" },
+    { name: "Tijuana", country: "Mexico", lat: 32.5149, lng: -117.0382, year: "2018", description: "Vibrant culture and delicious tacos" },
+    { name: "Dublin", country: "Ireland", lat: 53.3498, lng: -6.2603, year: "2017", description: "Friendly people and rich history" },
+    { name: "Madrid", country: "Spain", lat: 40.4168, lng: -3.7038, year: "2016", description: "Art, culture, and delicious tapas" },
+    { name: "Amsterdam", country: "Netherlands", lat: 52.3676, lng: 4.9041, year: "2015", description: "Canals, museums, and vibrant nightlife" },
+    { name: "Stockholm", country: "Sweden", lat: 59.3293, lng: 18.0686, year: "2014", description: "Beautiful archipelago and rich history" },
+    { name: "Sandviken", country: "Sweden", lat: 60.6167, lng: 16.7667, year: "2013", description: "Charming town with a rich industrial history" },
+    { name: "Barcelona", country: "Spain", lat: 41.3851, lng: 2.1734, year: "2012", description: "Stunning architecture and vibrant culture" },
+    { name: "Copenhagen", country: "Denmark", lat: 55.6761, lng: 12.5683, year: "2011", description: "Beautiful canals and modern design" },
+    { name: "Granada", country: "Spain", lat: 37.1773, lng: -3.5986, year: "2010", description: "Historic Alhambra and stunning views" },
+    { name: "Whistler", country: "Canada", lat: 50.1163, lng: -122.9574, year: "2009", description: "World-class skiing and beautiful mountains" },
+    { name: "Kauai", country: "Hawaii, USA", lat: 22.0964, lng: -159.5261, year: "2008", description: "Stunning beaches and lush landscapes" },
+    { name: "Prague", country: "Czech Republic", lat: 50.0755, lng: 14.4378, year: "2007", description: "Beautiful architecture and rich history" },
   ];
 
   // World map data (simplified - in production you'd load from topojson file)
-  const worldData = {
-    type: "FeatureCollection",
-    features: [...data?.land ? [data.land] : []]
+  // const worldData = {
+  //   type: "FeatureCollection",
+  //   features: [...data?.land ? [data.land] : []]
       // Load land and interiors from topojson file if available
       // Example: ...data?.land ? [data.land] : []
       // For demo purposes, we'll create the globe effect with just the graticule
-  };
-  console.log('worldData', worldData);
+  // };
+  // first fetch the data
   useEffect(() => {
+    d3.json(jsonUrl).then(topojsonData => {
+      const { countries, land } = topojsonData.objects;
+      setData({
+        land: topojson.feature(topojsonData, land),
+        interiors: topojson.mesh(
+          topojsonData, countries, (a, b) => a !== b
+        )
+      });
+    });
+  // }, []);
+
+  // const landArray = data?.land.features[0].geometry.coordinates || [];
+
+  // now set the svgRef and draw the globe
+  // useEffect(() => {
     const svg = d3.select(svgRef.current);
     const width = 600;
     const height = 600;
 
-    d3.json(jsonUrl).then(topojsonData => {
-        const {countries,land} = topojsonData.objects
-        setData({
-    land: topojson.feature(topojsonData, land),
-    interiors: topojson.mesh(
-    topojsonData, countries, (a, b)=>  a !== b)});
-    });
+    // d3.json(jsonUrl).then(topojsonData => {
+    //     const {countries,land} = topojsonData.objects
+    //     setData({
+    // land: topojson.feature(topojsonData, land),
+    // interiors: topojson.mesh(
+    // topojsonData, countries, (a, b)=>  a !== b)});
+    // });
     
     svg.selectAll("*").remove();
     
@@ -71,24 +96,8 @@ const InteractiveGlobe = () => {
       .attr("stroke-width", 0.5)
       .attr("opacity", 0.3);
     
-    // Add land masses (simplified)
-    // const landFeatures = [
-    //   // North America
-    //   { type: "Feature", geometry: { type: "Polygon", coordinates: [[[-140, 60], [-140, 10], [-60, 10], [-60, 60], [-140, 60]]] }},
-    //   // Europe
-    //   { type: "Feature", geometry: { type: "Polygon", coordinates: [[[0, 60], [0, 35], [40, 35], [40, 60], [0, 60]]] }},
-    //   // Asia
-    //   { type: "Feature", geometry: { type: "Polygon", coordinates: [[[40, 60], [40, 10], [140, 10], [140, 60], [40, 60]]] }},
-    //   // Africa
-    //   { type: "Feature", geometry: { type: "Polygon", coordinates: [[[0, 35], [0, -35], [40, -35], [40, 35], [0, 35]]] }},
-    //   // South America
-    //   { type: "Feature", geometry: { type: "Polygon", coordinates: [[[-80, 10], [-80, -60], [-35, -60], [-35, 10], [-80, 10]]] }},
-    //   // Australia
-    //   { type: "Feature", geometry: { type: "Polygon", coordinates: [[[110, -10], [110, -45], [155, -45], [155, -10], [110, -10]]] }}
-    // ];
-    console.log(data);
-    const landFeatures = data?.land ? [data.land] : [];
-    
+    const landFeatures = data?.land.features || [];
+
     svg.selectAll(".land")
       .data(landFeatures)
       .enter()
@@ -100,8 +109,8 @@ const InteractiveGlobe = () => {
       .attr("stroke-width", 0.5);
     
     // Add visited cities
-    const cityGroups = svg.selectAll(".city")
-      .data(visitedCities)
+    const cityGroups = svg.selectAll(".name")
+      .data(visitedCountries)
       .enter()
       .append("g")
       .attr("class", "city");
@@ -193,8 +202,9 @@ const InteractiveGlobe = () => {
       if (rotationTimer) rotationTimer.stop();
     };
   }, [isRotating]);
-
+  console.log('data loaded?', data);
   return (
+    data?.land ? (
     <div className="relative">
       <div className="mb-4 flex justify-center">
         <button
@@ -246,6 +256,11 @@ const InteractiveGlobe = () => {
         <p>🌍 Drag to rotate manually • Red markers show visited cities</p>
       </div>
     </div>
+    ) : (
+      <div className="text-center">
+        <p>Loading world map...</p>
+      </div>
+    )
   );
 };
 
