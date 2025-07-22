@@ -6,7 +6,7 @@ import InteractiveGlobe from "./InteractiveGlobe";
 const TravelMap = ({ visible, onClose, setTooltipContent }) => {
     const [data, setData] = useState([]);
 
-    const title = 'Places that have shaped me';
+    const title = 'Travel Thus Far';
     const footer = [
         <Button key="back" onClick={onClose} className="text-cyan-400 hover:text-cyan-300 m-2">
             Back

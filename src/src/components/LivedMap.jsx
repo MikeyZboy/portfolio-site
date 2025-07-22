@@ -56,7 +56,6 @@ return (
                 {({ geographies }) =>
                   geographies.map((geo) => {
                     const d = visitedData.find((visitedData) => visitedData.name === geo.properties.name);
-                    // d ? geo.properties.color = colorScale(d.time_spent) : geo.properties.color = "#e6e6e6"; // Default color for countries not visited
                     return (
                     <Geography
                         key={geo.rsmKey}
