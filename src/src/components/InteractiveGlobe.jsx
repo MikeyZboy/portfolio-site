@@ -33,6 +33,39 @@ const InteractiveGlobe = () => {
   const animationRef = useRef();
   const [isRotating, setIsRotating] = useState(true);
 
+  {/* Render city dots for hovered country */}
+  const mapCityPoints = (infoPanel) => {
+      infoPanel.info.visitedCities?.map((city, idx) => {
+      // Project city coordinates to SVG
+      if (!city.lat || !city.lng) return null;
+      // Use the same projection as the globe
+      const projection = d3.geoOrthographic()
+        .scale(250)
+        .translate([600 / 2, 600 / 2])
+        .clipAngle(90)
+        .rotate(rotationRef.current);
+      const [x, y] = projection([city.lng, city.lat]) || [null, null];
+      // Only show if on the visible side of the globe
+      if (x === null || y === null) return null;
+      // Check if the city is on the front hemisphere
+      const center = [600 / 2, 600 / 2];
+      const dist = Math.sqrt(Math.pow(x - center[0], 2) + Math.pow(y - center[1], 2));
+      if (dist > 250) return null;
+    return (
+      <circle
+        key={city.name + idx}
+        cx={x}
+        cy={y}
+        r={5}
+        fill="#fff"
+        stroke="#ff5722"
+        strokeWidth={2}
+        style={{ pointerEvents: 'none' }}
+      />
+    );
+  })};
+
+
   // Fetch world data
   useEffect(() => {
     d3.json(jsonUrl).then(topojsonData => {
@@ -151,7 +184,6 @@ const InteractiveGlobe = () => {
     animate();
     return () => cancelAnimationFrame(animationRef.current);
   }, [data, isRotating, hoveredCountryIdx]);
-
   return (
     <div className="relative">
       <div className="flex flex-col items-center justify-center">
@@ -166,13 +198,20 @@ const InteractiveGlobe = () => {
       </div>
       {/* Absolutely positioned info panel in the top right */}
       {infoPanel && (
-        <div className="absolute top-6 right-6 z-50 w-64 bg-white p-4 rounded-lg shadow-xl border-2 border-gray-200 h-fit">
+        <div className="absolute top-6 right-6 z-50 w-64 bg-white p-4 rounded-lg shadow-xl border-2 border-gray-200">
           <h3 className="font-bold text-lg text-gray-800 mb-2">{infoPanel.country}</h3>
-          <p className="text-sm text-orange-600 font-semibold mb-2">{infoPanel.info.year && `Visited: ${infoPanel.info.year}`}</p>
-          <p className="text-sm text-gray-700 mb-1">{infoPanel.info.description}</p>
-          {infoPanel.info.time_spent && (
-            <p className="text-xs text-gray-500">Time spent: {infoPanel.info.time_spent} days</p>
-          )}
+          {/* <p className="text-sm text-gray-700 mb-1">{infoPanel.info.description}</p> */}
+          {/* <p className="text-sm text-orange-600 font-semibold mb-2">{infoPanel.info.year && `Visited: ${infoPanel.info.year}`}</p> */}
+          <h3>Visited Cities:</h3>
+          <ol>
+            {infoPanel.info.visitedCities?.map((city) => 
+              <>
+                <li className="text-sm text-orange-600 font-semibold mb-2"><b>{city.name} - {city.year}</b></li>
+                <p className="text-sm mb-2">{city.description}</p>
+              </>
+            )}
+          </ol>
+          {mapCityPoints(infoPanel)}
         </div>
       )}
     </div>
