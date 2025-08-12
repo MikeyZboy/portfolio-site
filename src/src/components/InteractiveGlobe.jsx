@@ -261,7 +261,14 @@ const InteractiveGlobe = () => {
             {infoPanel.info.visitedCities?.map((city, idx) => (
               <div key={city.name + idx} className="border-b border-gray-100 pb-2">
                 <div className="text-sm text-orange-600 font-semibold">{city.name} - {city.year}</div>
-                <div className="text-xs text-gray-600 mt-1">{city.description}</div>
+                {city.description && (
+                  <ul className="mt-1 ml-4 list-disc text-xs text-gray-600">
+                    {city.description.map((part, i) => {
+                      const text = part.trim();
+                      return text ? <li key={i}>{text}</li> : null;
+                    })}
+                  </ul>
+                )}
               </div>
             ))}
           </div>
