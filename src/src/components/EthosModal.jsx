@@ -1,8 +1,10 @@
 import React from 'react';
 import { Modal, Typography, Button } from 'antd';
 
+const { Title, Text, Paragraph } = Typography;
+
 export default function EthosModal({ children, onClose, visible }) {
-    const title = 'My Underlying Code';
+    const title = <Title level={3}>My Career Code</Title>;
     const footer = [
         <Button key="back" onClick={onClose} className="text-cyan-400 hover:text-cyan-300 m-2">
             Back
@@ -18,27 +20,29 @@ export default function EthosModal({ children, onClose, visible }) {
             onCancel={onClose}
             footer={footer}
         >
-            <Typography>
-            Some would call them soft skills, but they are learned and earned through hard work.
-
-            In every aspect of what I do, I strive to be present. Focused. Giving my undivided attention.
-            This is a fundamental part of my work that I have learned after years of multi-tasking, multi-threading, and juggling multiple sales processes simultaneously.
-            I didn't feel like I could be authentic and allow my brain to fully dive into the work I was doing. That wasn't for me.
-
-            I grew invaluable skills in the sales world - active listening, seeing from the other's perspective, presenting and connecting professionally, and most importantly, never settle.
-
-            It was the belief that I should never be settling and feeling stuck that I couldn't help the users I was selling to that lead me to become an Engineer. I was frustrated listening to how our software could improve their days, but how we were still missing the mark.
-            I wanted to fix things. I started learning to code on FreeCodeCamp. I found myself trying to learn more Javascript and investigate Chrome Developer Tools to see how it worked.
-
-            Covid hits and I now have loads of free time as buying processes for Visitor Management solutions screech to a halt. Goodbye Envoy, it's time to take this serious.
-
-            Enroll in a full time, 12-week immersive Full-Stack program with General Assembly. I take in SO much in so little time - Javascript, React, Express, Node, Mongo, Blockchain, Python, OOP, Algorithms, SQL, RDBMS, etc.
-            My head nearly explodes, but I love every single second of it.
-        
-            Now I bring the energy, focus, and user-centric eagerness to my software development. 
-            On the front-end, I am focused on creating beautiful, simple user interfaces that are easy and delightful to click around. I also like dumb components upfront that are isolated and stripped of any identifiable data.
-            On the back-end, I like to create fast, robust APIs, that...help me GPT!
-            </Typography>
+        {/* <div class="bg-gray-800 round-lg px-4 py-4 ring shadow-xl ring-gray-900/5"> */}
+        <p class="font-mono text-sm-6 tracking-tight line-clamp-18 whitespace-normal overflow-auto text-gray-600 mt-2 mb-2">
+            Some call them <em>soft skills</em>. I call them earned advantages — sharpened by years of high-pressure sales cycles, human-first problem solving, and relentless curiosity.
+        <br />
+        <br />
+            In every environment, I’ve learned that presence is power. Not just being there, but being fully engaged — tuned in to what users are saying, what they need, and sometimes, what they can’t quite articulate yet. That skill didn’t come from coding bootcamps. It came from the sales floor, where multitasking and half-listening never led to real solutions. I knew there had to be a better way — a way to go deeper, to actually fix the problems I kept hearing from users.
+        <br />
+        <br />
+            That’s what led me to software engineering.
+        <br />
+        <br />
+            When I was selling software, I often found myself wishing I could just crack it open and fix what wasn’t working. So I started poking around in Chrome DevTools, tinkering with JavaScript tutorials on FreeCodeCamp — not because someone told me to, but because I needed to understand what was under the hood. When the pandemic hit and visitor management use-cases dried up, I saw it as an opening, not an ending.
+        <br />
+        <br />
+            I enrolled in a 12-week immersive Full-Stack Software Engineering program with General Assembly. It was intense. JavaScript, React, Node, Express, SQL, MongoDB, Python, OOP, Algorithms, Blockchain — all in rapid succession. It felt like drinking from a firehose, but it was the most alive I had ever felt at work.
+        <br />
+        <br />
+            Now, as a software engineer, I bring that same energy — the ability to listen deeply, think critically, and build with empathy. I approach every codebase with a user-first mindset and every team interaction with the professionalism honed through years of client-facing work. I’m not just writing code; I’m translating human needs into scalable, elegant solutions.
+        <br />
+        <br />
+            This isn’t a career change — it’s a continuation of what I’ve always done: solving real problems for real people.
+        </p>
+        {/* </div> */}
         </Modal>
     )
 
