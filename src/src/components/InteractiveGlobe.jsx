@@ -32,39 +32,7 @@ const InteractiveGlobe = () => {
   const rotationRef = useRef([-60, -10, 0]); // More left tilt
   const animationRef = useRef();
   const [isRotating, setIsRotating] = useState(true);
-
-  {/* Render city dots for hovered country */}
-  const mapCityPoints = (infoPanel) => {
-      infoPanel.info.visitedCities?.map((city, idx) => {
-      // Project city coordinates to SVG
-      if (!city.lat || !city.lng) return null;
-      // Use the same projection as the globe
-      const projection = d3.geoOrthographic()
-        .scale(250)
-        .translate([600 / 2, 600 / 2])
-        .clipAngle(90)
-        .rotate(rotationRef.current);
-      const [x, y] = projection([city.lng, city.lat]) || [null, null];
-      // Only show if on the visible side of the globe
-      if (x === null || y === null) return null;
-      // Check if the city is on the front hemisphere
-      const center = [600 / 2, 600 / 2];
-      const dist = Math.sqrt(Math.pow(x - center[0], 2) + Math.pow(y - center[1], 2));
-      if (dist > 250) return null;
-    return (
-      <circle
-        key={city.name + idx}
-        cx={x}
-        cy={y}
-        r={5}
-        fill="#fff"
-        stroke="#ff5722"
-        strokeWidth={2}
-        style={{ pointerEvents: 'none' }}
-      />
-    );
-  })};
-
+  const isHoveringPanelRef = useRef(false);
 
   // Fetch world data
   useEffect(() => {
@@ -132,6 +100,7 @@ const InteractiveGlobe = () => {
         const match = getMatchingVisitedCountry(d, data.countries);
         if (match) {
           setHoveredCountryIdx(data.countries.features.indexOf(d));
+          setIsRotating(false); // Pause rotation on hover
           setInfoPanel({
             country: match.name,
             info: match
@@ -140,7 +109,13 @@ const InteractiveGlobe = () => {
       })
       .on('mouseout', function () {
         setHoveredCountryIdx(null);
-        setInfoPanel(null);
+        // Defer hiding to allow moving to the panel
+        setTimeout(() => {
+          if (!isHoveringPanelRef.current) {
+            setInfoPanel(null);
+            setTimeout(() => setIsRotating(true), 500);
+          }
+        }, 200);
       });
 
     // Borders
@@ -152,6 +127,33 @@ const InteractiveGlobe = () => {
       .attr('stroke', '#fff')
       .attr('stroke-width', 0.8)
       .attr('opacity', 0.7);
+
+    // Add city dots for hovered country
+    if (infoPanel && infoPanel.info.visitedCities) {
+      infoPanel.info.visitedCities.forEach((city, idx) => {
+        if (!city.lat || !city.lng) return;
+        
+        // Project city coordinates to SVG
+        const [x, y] = projection([city.lng, city.lat]) || [null, null];
+        if (x === null || y === null) return;
+        
+        // Check if the city is on the front hemisphere
+        const center = [width / 2, height / 2];
+        const dist = Math.sqrt(Math.pow(x - center[0], 2) + Math.pow(y - center[1], 2));
+        if (dist > 250) return;
+        
+        // Add city dot
+        svg.append('circle')
+          .attr('class', 'city-dot')
+          .attr('cx', x)
+          .attr('cy', y)
+          .attr('r', 4)
+          .attr('fill', '#fff')
+          .attr('stroke', '#ff5722')
+          .attr('stroke-width', 2)
+          .style('pointer-events', 'none');
+      });
+    }
 
     // Drag to rotate
     let lastRotation = [...rotationRef.current];
@@ -165,6 +167,27 @@ const InteractiveGlobe = () => {
         projection.rotate(rotationRef.current);
         svg.selectAll('path.land').attr('d', path);
         svg.selectAll('path.borders').attr('d', path);
+        // Update city dot positions
+        svg.selectAll('.city-dot').remove();
+        if (infoPanel && infoPanel.info.visitedCities) {
+          infoPanel.info.visitedCities.forEach((city, idx) => {
+            if (!city.lat || !city.lng) return;
+            const [x, y] = projection([city.lng, city.lat]) || [null, null];
+            if (x === null || y === null) return;
+            const center = [width / 2, height / 2];
+            const dist = Math.sqrt(Math.pow(x - center[0], 2) + Math.pow(y - center[1], 2));
+            if (dist > 250) return;
+            svg.append('circle')
+              .attr('class', 'city-dot')
+              .attr('cx', x)
+              .attr('cy', y)
+              .attr('r', 4)
+              .attr('fill', '#fff')
+              .attr('stroke', '#ff5722')
+              .attr('stroke-width', 2)
+              .style('pointer-events', 'none');
+          });
+        }
       })
       .on('end', () => {
         setTimeout(() => setIsRotating(true), 1000);
@@ -178,12 +201,34 @@ const InteractiveGlobe = () => {
         projection.rotate(rotationRef.current);
         svg.selectAll('path.land').attr('d', path);
         svg.selectAll('path.borders').attr('d', path);
+        // Update city dot positions during rotation
+        svg.selectAll('.city-dot').remove();
+        if (infoPanel && infoPanel.info.visitedCities) {
+          infoPanel.info.visitedCities.forEach((city, idx) => {
+            if (!city.lat || !city.lng) return;
+            const [x, y] = projection([city.lng, city.lat]) || [null, null];
+            if (x === null || y === null) return;
+            const center = [width / 2, height / 2];
+            const dist = Math.sqrt(Math.pow(x - center[0], 2) + Math.pow(y - center[1], 2));
+            if (dist > 250) return;
+            svg.append('circle')
+              .attr('class', 'city-dot')
+              .attr('cx', x)
+              .attr('cy', y)
+              .attr('r', 4)
+              .attr('fill', '#fff')
+              .attr('stroke', '#ff5722')
+              .attr('stroke-width', 2)
+              .style('pointer-events', 'none');
+          });
+        }
       }
       animationRef.current = requestAnimationFrame(animate);
     }
     animate();
     return () => cancelAnimationFrame(animationRef.current);
-  }, [data, isRotating, hoveredCountryIdx]);
+  }, [data, isRotating, hoveredCountryIdx, infoPanel]);
+
   return (
     <div className="relative">
       <div className="flex flex-col items-center justify-center">
@@ -198,20 +243,28 @@ const InteractiveGlobe = () => {
       </div>
       {/* Absolutely positioned info panel in the top right */}
       {infoPanel && (
-        <div className="absolute top-6 right-6 z-50 w-64 bg-white p-4 rounded-lg shadow-xl border-2 border-gray-200">
+        <div
+          className="absolute top-6 right-6 z-50 w-64 bg-white p-4 rounded-lg shadow-xl border-2 border-gray-200 max-h-96 overflow-y-auto"
+          onMouseEnter={() => {
+            isHoveringPanelRef.current = true;
+            setIsRotating(false);
+          }}
+          onMouseLeave={() => {
+            isHoveringPanelRef.current = false;
+            setInfoPanel(null);
+            setTimeout(() => setIsRotating(true), 500);
+          }}
+        >
           <h3 className="font-bold text-lg text-gray-800 mb-2">{infoPanel.country}</h3>
-          {/* <p className="text-sm text-gray-700 mb-1">{infoPanel.info.description}</p> */}
-          {/* <p className="text-sm text-orange-600 font-semibold mb-2">{infoPanel.info.year && `Visited: ${infoPanel.info.year}`}</p> */}
-          <h3>Visited Cities:</h3>
-          <ol>
-            {infoPanel.info.visitedCities?.map((city) => 
-              <>
-                <li className="text-sm text-orange-600 font-semibold mb-2"><b>{city.name} - {city.year}</b></li>
-                <p className="text-sm mb-2">{city.description}</p>
-              </>
-            )}
-          </ol>
-          {mapCityPoints(infoPanel)}
+          <h3 className="text-sm font-semibold text-gray-700 mb-2">Visited Cities:</h3>
+          <div className="space-y-2">
+            {infoPanel.info.visitedCities?.map((city, idx) => (
+              <div key={city.name + idx} className="border-b border-gray-100 pb-2">
+                <div className="text-sm text-orange-600 font-semibold">{city.name} - {city.year}</div>
+                <div className="text-xs text-gray-600 mt-1">{city.description}</div>
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>
