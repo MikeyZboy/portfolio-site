@@ -126,7 +126,7 @@ export const App = () => {
                 className="text-2xl font-semibold mb-2 cursor-pointer text-highlight-300 hover:text-highlight-200"
                 onClick={toggleFeaturedProjectModal}
               >
-                Your Ai Refund Agent (YARA)
+                Your AI Refund Agent (YARA)
               </h2>
               <ProjectsModal visible={isFeaturedProjectVisible} onClose={toggleFeaturedProjectModal} />
           </div> 
