@@ -3,14 +3,13 @@ import { Modal, Typography, Button } from 'antd';
 import { DownloadOutlined } from '@ant-design/icons';
 
 export default function ExperienceModal({ children, onClose, visible }) {
-    const title = 'Experience';
+    const title = <Button key="download" icon={<DownloadOutlined />} className="m-1">
+                <a href="../assets/MikeZahutaCV.pdf" download="MikeZahutaCV.pdf">
+                    Download
+                </a>
+                </Button>;
     const footer = [
         <div className="flex-row justify-right">
-            <Button key="download" icon={<DownloadOutlined />} className="m-1">
-            <a href="../assets/MikeZahutaCV.pdf" download="MikeZahutaCV.pdf">
-                Download
-            </a>
-            </Button>
             <Button key="back" onClick={onClose} className="m-1">Back</Button>
         </div>
     ];
