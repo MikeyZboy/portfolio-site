@@ -5,9 +5,9 @@ import { visitedCountries } from '../assets/mydata';
 
 const jsonUrl = 'https://cdn.jsdelivr.net/npm/visionscarto-world-atlas@1/world/110m.json';
 
-const VISITED_COLOR = '#ff5722'; // Red-orange
+const VISITED_COLOR = 'var(--highlight-300)'; // Red-orange
 const UNVISITED_COLOR = '#e0e7ef'; // Light neutral
-const HOVER_COLOR = '#ff784e'; // Lighter red-orange
+const HOVER_COLOR = 'var(--highlight-200)'; // Lighter red-orange
 
 function normalizeName(name) {
   return name ? name.trim().toLowerCase() : '';
@@ -149,7 +149,7 @@ const InteractiveGlobe = () => {
           .attr('cy', y)
           .attr('r', 4)
           .attr('fill', '#fff')
-          .attr('stroke', '#ff5722')
+          .attr('stroke', 'var(--highlight-500)')
           .attr('stroke-width', 2)
           .style('pointer-events', 'none');
       });
@@ -183,7 +183,7 @@ const InteractiveGlobe = () => {
               .attr('cy', y)
               .attr('r', 4)
               .attr('fill', '#fff')
-              .attr('stroke', '#ff5722')
+              .attr('stroke', 'var(--highlight-500)')
               .attr('stroke-width', 2)
               .style('pointer-events', 'none');
           });
@@ -217,7 +217,7 @@ const InteractiveGlobe = () => {
               .attr('cy', y)
               .attr('r', 4)
               .attr('fill', '#fff')
-              .attr('stroke', '#ff5722')
+              .attr('stroke', 'var(--highlight-500)')
               .attr('stroke-width', 2)
               .style('pointer-events', 'none');
           });
@@ -255,12 +255,12 @@ const InteractiveGlobe = () => {
             setTimeout(() => setIsRotating(true), 500);
           }}
         >
-          <h3 className="font-bold text-lg text-gray-800 mb-2">{infoPanel.country}</h3>
+          <h3 className="font-bold text-lg text-highlight-500 mb-2">{infoPanel.country}</h3>
           <h3 className="text-sm font-semibold text-gray-700 mb-2">Visited Cities:</h3>
           <div className="space-y-2">
             {infoPanel.info.visitedCities?.map((city, idx) => (
               <div key={city.name + idx} className="border-b border-gray-100 pb-2">
-                <div className="text-sm text-orange-600 font-semibold">{city.name} - {city.year}</div>
+                <div className="text-sm text-highlight-500 font-semibold">{city.name} - {city.year}</div>
                 {city.description && (
                   <ul className="mt-1 ml-4 list-disc text-xs text-gray-600">
                     {city.description.map((part, i) => {
