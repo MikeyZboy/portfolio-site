@@ -51,12 +51,22 @@ export const App = () => {
     <div className="bg-gray-900 text-gray-100 container max-w-screen mx-auto">
       <div className="container max-w-screen mx-auto p-4">
         {/* Bento Box Layout */}
-          <div className="grid grid-cols-3 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
             {/* Welcome - Span 2 columns */}
-            <div className="bg-gray-800 rounded-lg p-6 md:col-span-3 transition duration-300 grid grid-cols-2">
+            <div className="bg-gray-800 rounded-lg p-6 md:col-span-3 transition duration-300 grid grid-cols-1 md:grid-cols-2">
 
-            <div className="col-span-1 text-left">
-              <p className="mb-4 text-xl">
+            <div className="col-span-1 text-left relative">
+              {/* Mobile Memoji Icon - Top Right Corner */}
+              <div className="absolute top-0 right-0 md:hidden">
+                <img
+                  src={memojis[0].src}
+                  alt={memojis[0].alt}
+                  className="w-16 h-16 rounded-full object-cover border-2 border-highlight-300"
+                  style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
+                />
+              </div>
+              
+              <p className="mb-4 text-xl pr-20 md:pr-0">
               Hello world, I am <b className="text-highlight-300">Mike Zahuta</b>, a passionate <b className="text-highlight-300">Full Stack Developer</b> with over 4 years of experience creating 
               responsive web apps. A long time ago, in a startup far, far away, I discovered my love for coding while I was selling SaaS products. 
               Now, I use my user-focused critical thinking and listening skills to help companies deliver the best software solutions possible.
@@ -102,8 +112,10 @@ export const App = () => {
                 </Tooltip>
               </div>
             </div>
-              <div className="relative inset-0 flex items-center justify-center hidden md:block">
-                <MemojiCarousel images={memojis} />
+              <div className="relative inset-0 flex items-center justify-center hidden md:block overflow-hidden">
+                <div className="flex items-center justify-center p-4">
+                  <MemojiCarousel images={memojis} />
+                </div>
               </div>
           </div>
           
@@ -200,7 +212,7 @@ export const App = () => {
             <div className="columns-2">
               <Flex justify="center" className="flex-col">
                 {/* Clock component - responsive sizing to prevent overlap */}
-                <div className="bg-gray-800 rounded-lg mb-2 hover:bg-gray-700 transition duration-300 text-left hidden sm:block">
+                <div className="flex-row bg-gray-800 rounded-lg mb-2 hover:bg-gray-700 transition duration-300 text-left hidden sm:block">
                     <TimeDisplay />
                 </div>
 
@@ -218,7 +230,7 @@ export const App = () => {
                 </div>
                 <FunModal visible={isFunModalVisible} onClose={toggleFunModal} />
                 <div className="flex-row bg-gray-800 rounded-lg mb-2 p-2 hover:bg-gray-700 transition duration-300 text-left overflow-auto">
-                    <h3 className="text-2xl font-semibold mb-2 cursor-pointer text-highlight-300 hover:text-highlight-200">
+                    <h3 className="text-2xl font-semibold cursor-pointer text-highlight-300 hover:text-highlight-200">
                     <ThemePicker visible={true} />
                     </h3>
                 </div>
