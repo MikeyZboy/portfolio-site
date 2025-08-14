@@ -21,6 +21,7 @@ import MemojiCarousel from './components/MemojiCarousel';
 import TimeDisplay from './components/CurrentTime';
 import TravelMap from './components/TravelMap';
 import ThemePicker from './components/ThemePicker';
+import FunModal from './components/FunModal';
 
 export const App = () => {
   const [isFeaturedProjectVisible, setIsFeaturedProjectVisible] = useState(false);
@@ -28,15 +29,14 @@ export const App = () => {
   const [ethosVisible, setEthosVisible] = useState(false);
   const [experienceVisible, setExperienceVisible] = useState(false);
   const [isMapVisible, setIsMapVisible] = useState(false);
-  const [isThemePickerVisible, setIsThemePickerVisible] = useState(false);
-  const [content, setContent] = useState("");
+  const [isFunModalVisible, setIsFunModalVisible] = useState(false);
   
   const toggleFeaturedProjectModal = () => setIsFeaturedProjectVisible((prev) => !prev);
   const toggleLogoCloud = () => setSkillsVisible((prev) => !prev);
   const toggleEthosCloud = () => setEthosVisible((prev) => !prev);
   const toggleExperienceCloud = () => setExperienceVisible((prev) => !prev);
   const toggleMap = () => setIsMapVisible((prev) => !prev);
-  const toggleColor = () => setIsThemePickerVisible((prev) => !prev);
+  const toggleFunModal = () => setIsFunModalVisible((prev) => !prev);
 
   const memojis = [
     { src: HeartMemoji, alt: 'Heart Memoji' },
@@ -209,19 +209,19 @@ export const App = () => {
                       travel
                     </h2>
                 </div>
-                <TravelMap visible={isMapVisible} onClose={toggleMap} setTooltipContent={setContent} />
+                <TravelMap visible={isMapVisible} onClose={toggleMap} />
+
                 <div className="flex-row bg-gray-800 rounded-lg mb-2 p-2 hover:bg-gray-700 transition duration-300 text-left overflow-auto">
-                    <h3 className="text-2xl font-semibold mb-2 cursor-pointer text-highlight-300 hover:text-highlight-200">
+                    <h3 className="text-2xl font-semibold mb-2 cursor-pointer text-highlight-300 hover:text-highlight-200" onClick={toggleFunModal}>
                       fun
                     </h3>
                 </div>
-
+                <FunModal visible={isFunModalVisible} onClose={toggleFunModal} />
                 <div className="flex-row bg-gray-800 rounded-lg mb-2 p-2 hover:bg-gray-700 transition duration-300 text-left overflow-auto">
-                    <h3 className="text-2xl font-semibold mb-2 cursor-pointer text-highlight-300 hover:text-highlight-200" onClick={toggleColor}>
+                    <h3 className="text-2xl font-semibold mb-2 cursor-pointer text-highlight-300 hover:text-highlight-200">
                     <ThemePicker visible={true} />
                     </h3>
                 </div>
-                  {/* <ThemePicker visible={isThemePickerVisible} onClose={toggleColor}  style={{ position: 'absolute', bottom: 1, right: 5 }}/> */}
               </Flex>
             </div>
             <footer className="mt-2 text-center text-gray-500 py-0">
