@@ -199,8 +199,8 @@ export const App = () => {
           <div>
             <div className="columns-2">
               <Flex justify="center" className="flex-col">
-                {/* This div will be hidden on small screens to prevent overlap */}
-                <div className="bg-gray-800 rounded-lg mb-2 hover:bg-gray-700 transition duration-300 text-left hidden md:block">
+                {/* Clock component - responsive sizing to prevent overlap */}
+                <div className="bg-gray-800 rounded-lg mb-2 hover:bg-gray-700 transition duration-300 text-left hidden sm:block">
                     <TimeDisplay />
                 </div>
 
