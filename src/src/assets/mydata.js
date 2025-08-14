@@ -2,7 +2,7 @@ export const visitedCountries = [
     { name: "United States of America", lat: 37.0902, lng: -95.7129, year: "1984 - Present Day", description: "Diverse landscapes and cultures", time_spent: 35,
         visitedCities: [
             { name: "San Luis Obispo", lat: 35.2828, lng: -120.6596, year: "2002 - 2007", description: ["Cal Poly", "Oprah's best city in America", "beautiful coastal town with great people" ]},
-            { name: "Kauai", lat: 22.0964, lng: -159.5261, year: "2006", description: "Stunning beaches and lush landscapes, wedding time!" },
+            { name: "Kauai", lat: 22.0964, lng: -159.5261, year: "2006", description: ["Stunning beaches", "lush landscapes", "Jurassic Park", "wedding time!"] },
             { name: "New York", lat: 40.7128, lng: -74.0060, year: "2008, 2017, 2023, 2025", description: ["Yankee Stadium", "Central Park", "Times Square", "Coney Island", "Citi Field", "Statue of Liberty"] },
             { name: "Atlanta", lat: 33.7490, lng: -84.3880, year: "2013", description: ["Turner Field", "First Waffle House", "Family Reunion"] },
             { name: "Yosemite", lat: 37.8651, lng: -119.5383, year: "2016", description: ["The Ahwahnee Hotel", "the Valley", "Half-Dome", "hiking"] },

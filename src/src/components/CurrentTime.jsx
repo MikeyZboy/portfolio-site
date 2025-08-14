@@ -52,7 +52,7 @@ export default function TimeDisplay() {
   const mikesTime = `It's currently ${formatEasternTime()} for Mike.`;
   return (
       <div
-        className="p-1 bg-gradient-to-b from-black-900 to-cyan-600 rounded-lg shadow-lg transition-all duration-300 ease-in-out transform"
+        className="p-1 bg-gradient-to-b from-black-900 to-highlight-600 rounded-lg shadow-lg transition-all duration-300 ease-in-out transform"
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >

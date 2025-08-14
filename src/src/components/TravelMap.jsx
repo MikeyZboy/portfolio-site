@@ -8,7 +8,7 @@ const TravelMap = ({ visible, onClose, setTooltipContent }) => {
 
     const title = 'Travel Thus Far';
     const footer = [
-        <Button key="back" onClick={onClose} className="text-cyan-400 hover:text-cyan-300 m-2">
+        <Button key="back" onClick={onClose} className="text-highlight-400 hover:text-highlight-300 m-2">
             Back
         </Button>,
         ];

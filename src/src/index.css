@@ -1,9 +1,77 @@
 @import url('https://fonts.googleapis.com/css2?family=Afacad+Flux:slnt,wght@-14..14,300&family=Dosis:wght@200..800&display=swap');
 @import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* @theme {
   --font-roboto: "Roboto", sans-serif; 
 } */
+
+/* CSS Custom Properties for dynamic theme colors */
+:root {
+  --highlight-50: #f0fdfa;
+  --highlight-100: #ccfbf1;
+  --highlight-200: #99f6e4;
+  --highlight-300: #5eead4;
+  --highlight-400: #2dd4bf;
+  --highlight-500: #14b8a6;
+  --highlight-600: #0d9488;
+  --highlight-700: #0f766e;
+  --highlight-800: #115e59;
+  --highlight-900: #134e4a;
+  --highlight-color: #14b8a6;
+}
+
+/* Custom utility classes that use CSS variables */
+.text-highlight-50 { color: var(--highlight-50); }
+.text-highlight-100 { color: var(--highlight-100); }
+.text-highlight-200 { color: var(--highlight-200); }
+.text-highlight-300 { color: var(--highlight-300); }
+.text-highlight-400 { color: var(--highlight-400); }
+.text-highlight-500 { color: var(--highlight-500); }
+.text-highlight-600 { color: var(--highlight-600); }
+.text-highlight-700 { color: var(--highlight-700); }
+.text-highlight-800 { color: var(--highlight-800); }
+.text-highlight-900 { color: var(--highlight-900); }
+
+.bg-highlight-50 { background-color: var(--highlight-50); }
+.bg-highlight-100 { background-color: var(--highlight-100); }
+.bg-highlight-200 { background-color: var(--highlight-200); }
+.bg-highlight-300 { background-color: var(--highlight-300); }
+.bg-highlight-400 { background-color: var(--highlight-400); }
+.bg-highlight-500 { background-color: var(--highlight-500); }
+.bg-highlight-600 { background-color: var(--highlight-600); }
+.bg-highlight-700 { background-color: var(--highlight-700); }
+.bg-highlight-800 { background-color: var(--highlight-800); }
+.bg-highlight-900 { background-color: var(--highlight-900); }
+
+.border-highlight-50 { border-color: var(--highlight-50); }
+.border-highlight-100 { border-color: var(--highlight-100); }
+.border-highlight-200 { border-color: var(--highlight-200); }
+.border-highlight-300 { border-color: var(--highlight-300); }
+.border-highlight-400 { border-color: var(--highlight-400); }
+.border-highlight-500 { border-color: var(--highlight-500); }
+.border-highlight-600 { border-color: var(--highlight-600); }
+.border-highlight-700 { border-color: var(--highlight-700); }
+.border-highlight-800 { border-color: var(--highlight-800); }
+.border-highlight-900 { border-color: var(--highlight-900); }
+
+/* Hover states */
+.hover\:text-highlight-500:hover { color: var(--highlight-500); }
+.hover\:text-highlight-600:hover { color: var(--highlight-600); }
+.hover\:bg-highlight-100:hover { background-color: var(--highlight-100); }
+.hover\:bg-highlight-200:hover { background-color: var(--highlight-200); }
+.hover\:border-highlight-300:hover { border-color: var(--highlight-300); }
+.hover\:border-highlight-400:hover { border-color: var(--highlight-400); }
+
+/* Focus states */
+.focus\:border-highlight-500:focus { border-color: var(--highlight-500); }
+.focus\:ring-highlight-500:focus { --tw-ring-color: var(--highlight-500); }
+
+/* Ring utilities */
+.ring-highlight-500 { --tw-ring-color: var(--highlight-500); }
+.ring-highlight-400 { --tw-ring-color: var(--highlight-400); }
 
 :root {
   font-family: "Afacad Flux", sans-serif;
@@ -22,11 +90,11 @@
 
 a {
   font-weight: 500;
-  color: cyan;
+  color: var(--highlight-500);
   text-decoration: inherit;
 }
 a:hover {
-  color: cyan;
+  color: var(--highlight-500);
 }
 
 body {
@@ -67,7 +135,7 @@ button:hover {
     background-color: #ffffff;
   }
   a:hover {
-    color: cyan;
+    color: var(--highlight-500);
   }
   button {
     background-color: #f9f9f9;
