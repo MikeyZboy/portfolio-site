@@ -17,36 +17,6 @@ const useIcons = (slugs) => {
         <span>{iconDescription}</span>
       </Tooltip>
     )
-    // const tooltip = document.createElement('div');
-    // tooltip.style.position = 'absolute';
-    // tooltip.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-    // tooltip.style.color = 'white';
-    // tooltip.style.padding = '5px 10px';
-    // tooltip.style.borderRadius = '5px';
-    // tooltip.style.fontSize = '12px';
-    // tooltip.style.pointerEvents = 'none';
-    // tooltip.style.zIndex = '1000';
-    // tooltip.innerText = iconDescription;
-
-    // document.body.appendChild(tooltip);
-
-    // const moveTooltip = (event) => {
-    //   tooltip.style.left = `${event.pageX + 10}px`;
-    //   tooltip.style.top = `${event.pageY + 10}px`;
-    // };
-
-    // document.addEventListener('mousemove', moveTooltip);
-
-    // e.target.addEventListener('mouseleave', () => {
-    //   document.body.removeChild(tooltip);
-    //   document.removeEventListener('mousemove', moveTooltip);
-    // }, { once: true });
-    // return (
-    //   <span>
-    //     <p>{iconDescription}</p>
-    //   </span>
-    // )
-    
   };
 
   if (icons) {

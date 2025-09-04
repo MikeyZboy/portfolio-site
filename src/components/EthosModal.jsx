@@ -20,8 +20,7 @@ export default function EthosModal({ children, onClose, visible }) {
             onCancel={onClose}
             footer={footer}
         >
-        {/* <div class="bg-gray-800 round-lg px-4 py-4 ring shadow-xl ring-gray-900/5"> */}
-        <p class="font-mono text-sm-6 tracking-tight line-clamp-18 whitespace-normal overflow-auto text-gray-600 mt-2 mb-2">
+        <p class="font-mono text-sm-6 tracking-tight whitespace-normal overflow-auto text-gray-600 mt-1 mb-1">
             Some call them <em>soft skills</em>. I call them earned advantages — sharpened by years of high-pressure sales cycles, human-first problem solving, and relentless curiosity.
         <br />
         <br />
@@ -31,7 +30,11 @@ export default function EthosModal({ children, onClose, visible }) {
             That’s what led me to software engineering.
         <br />
         <br />
-            When I was selling software, I often found myself wishing I could just crack it open and fix what wasn’t working. So I started poking around in Chrome DevTools, tinkering with JavaScript tutorials on FreeCodeCamp — not because someone told me to, but because I needed to understand what was under the hood. When the pandemic hit and visitor management use-cases dried up, I saw it as an opening, not an ending.
+            When I was selling software, I often found myself wishing I could just crack it open and fix what wasn't working. So I started poking around in Chrome DevTools, tinkering with JavaScript tutorials on FreeCodeCamp because I needed to 
+            understand what was happening under the hood.
+        <br />
+        <br />
+            When the pandemic hit and visitor management use-cases dried up, I saw it as an opening, not an ending.
         <br />
         <br />
             I enrolled in a 12-week immersive Full-Stack Software Engineering program with General Assembly. It was intense. JavaScript, React, Node, Express, SQL, MongoDB, Python, OOP, Algorithms, Blockchain — all in rapid succession. It felt like drinking from a firehose, but it was the most alive I had ever felt at work.
@@ -42,7 +45,6 @@ export default function EthosModal({ children, onClose, visible }) {
         <br />
             This isn’t a career change — it’s a continuation of what I’ve always done: solving real problems for real people.
         </p>
-        {/* </div> */}
         </Modal>
     )
 
