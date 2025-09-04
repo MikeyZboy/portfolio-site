@@ -13,20 +13,6 @@ const TravelMap = ({ visible, onClose, setTooltipContent }) => {
         </Button>,
         ];
 
-    // const fetchCountries = async () => {
-    //     try {
-    //         const response = await fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json');
-    //         const data = await response.json();
-    //         setData(data);
-    //     } catch (error) {
-    //         console.error("Error fetching countries:", error);
-    //     }
-    // };
-
-    // useEffect(() => {
-    //     fetchCountries();
-    // },[]);
-
     if (!visible) return null;
 
     return (
@@ -39,10 +25,6 @@ const TravelMap = ({ visible, onClose, setTooltipContent }) => {
             width={1000}
         >
             {data && (
-                // Trying a d3 option
-                // <InteractiveGlobe />
-                // Using React Simple Maps
-                // <LivedMap />
                 <InteractiveGlobe data={data}/>
             )}
         </Modal>

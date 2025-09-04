@@ -1,15 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Button, Modal } from 'antd';
 
 const HIGHLIGHT_KEY = "highlightColor";
 
-export default function ThemePicker({ children, onClose, visible }) {
-    // const title = 'Choose Your Color Theme'
-    // const footer = [
-    //     <Button key="back" onClick={onClose} className="text-highlight-400 hover:text-highlight-300 m-2">
-    //         Back
-    //     </Button>,
-    // ]
+export default function ThemePicker({ visible }) {
     const [highlight, setHighlight] = useState(
         localStorage.getItem(HIGHLIGHT_KEY) || "#67e8f9"
     );
@@ -64,7 +57,7 @@ export default function ThemePicker({ children, onClose, visible }) {
 
     return (
         <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
-            <span>highlight:</span>
+            <span>theme:</span>
             <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
                 <input
                     type="color"
@@ -73,11 +66,7 @@ export default function ThemePicker({ children, onClose, visible }) {
                     style={{
                         width: 40,
                         height: 40,
-                        // border: "2px solid #333",
-                        // borderRadius: "1.5em",
                         cursor: "pointer",
-                        // outline: "none",
-                        // padding: 0,
                         backgroundColor: "transparent"
                     }}
                 />

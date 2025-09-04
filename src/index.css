@@ -10,17 +10,17 @@
 
 /* CSS Custom Properties for dynamic theme colors */
 :root {
-  --highlight-50: #f0fdfa;
-  --highlight-100: #ccfbf1;
-  --highlight-200: #99f6e4;
-  --highlight-300: #5eead4;
-  --highlight-400: #2dd4bf;
-  --highlight-500: #14b8a6;
-  --highlight-600: #0d9488;
-  --highlight-700: #0f766e;
-  --highlight-800: #115e59;
-  --highlight-900: #134e4a;
-  --highlight-color: #14b8a6;
+  --highlight-50: #fef7ed;
+  --highlight-100: #fed7aa;
+  --highlight-200: #fdba74;
+  --highlight-300: #fb923c;
+  --highlight-400: #f97316;
+  --highlight-500: #ea580c;
+  --highlight-600: #dc2626;
+  --highlight-700: #b45309;
+  --highlight-800: #92400e;
+  --highlight-900: #78350f;
+  --highlight-color: #8C5B18;
 }
 
 /* Custom utility classes that use CSS variables */
@@ -99,10 +99,11 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
-  min-height: 100vh;
+  height: 100vh;
+  max-height: 100vh;
+  background-color: var(--highlight-700);
+  overflow: hidden;
 }
 
 h1 {

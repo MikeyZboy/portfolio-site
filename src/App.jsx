@@ -47,9 +47,9 @@ export const App = () => {
   ];
 
   return (
-    <Flex gap="middle" alig="flex-start" justify="center" className="min-h-screen bg-gray-900 text-gray-100">
-    <div className="bg-gray-900 text-gray-100 container max-w-screen mx-auto">
-      <div className="container max-w-screen mx-auto p-4">
+    <Flex gap="middle" align="flex-start" justify="center">
+    <div className="bg-gray-900 text-gray-100 container p-4 m-1 rounded-lg">
+      <div className="container max-w-screen mx-auto p-2">
         {/* Bento Box Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
             {/* Welcome - Span 2 columns */}
